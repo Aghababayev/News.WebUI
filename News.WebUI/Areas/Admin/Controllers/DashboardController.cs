@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using News.WebUI.Application.News_Module;
+using News.WebUI.ViewModels;
 using System.Threading.Tasks;
 
 namespace News.WebUI.Areas.Admin.Controllers
@@ -17,6 +19,17 @@ namespace News.WebUI.Areas.Admin.Controllers
         {
             var values = await _mediator.Send(new ListNewsQuerry());
             return View(values);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            var contents = await _mediator.Send(new GetContentTypeQuerry());
+            var model = new InfoContentVM
+            {
+                Contents = contents
+            };
+            return View(model);
+
         }
         
         
