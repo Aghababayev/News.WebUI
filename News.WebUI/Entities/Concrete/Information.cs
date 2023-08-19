@@ -14,6 +14,6 @@ namespace News.WebUI.Entities.Concrete
         public DateTime Created { get; set; }
         public bool IsValid { get; set;}
         public int ContentID { get; set; }
-        public Content Contents { get; set; }
+        public Content Content { get; set; }
     }
 }

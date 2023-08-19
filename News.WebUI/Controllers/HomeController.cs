@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using News.WebUI.Application.Reader_Module;
 using News.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -12,15 +14,18 @@ namespace News.WebUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IMediator _mediator;
+  
+        public HomeController(ILogger<HomeController> logger, IMediator mediator)
         {
-            _logger = logger;
+            _mediator = mediator;
+            _logger = logger;   
         }
 
-        public IActionResult Index()
+        public  async Task<IActionResult> Index()
         {
-            return View();
+            var values = await _mediator.Send(new ListMainNewsQuerry());
+            return View(values);
         }
 
         public IActionResult Privacy()

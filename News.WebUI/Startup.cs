@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,9 @@ namespace News.WebUI
             services.AddControllersWithViews();
             string connection = Configuration.GetConnectionString("Connnection");
             services.AddDbContext<Context>(opt => opt.UseSqlServer(connection));
+            services.AddMediatR(cfg => {
+                cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+            });
 
         }
 

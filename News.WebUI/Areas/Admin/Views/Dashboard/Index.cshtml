@@ -1,2 +1,61 @@
-﻿Admin Panel
+﻿@model List<Information>
 
+
+<div class="container-fluid">
+
+    @* <h3>Your overtime days: <span style="color:green">@ViewBag.CountOvertimes</span></h3>*@
+
+    <table id="tbl1" class="table table-light table-bordered table-hover" style="margin-top:20px">
+        <thead>
+            <tr>
+                <th>Header</th>
+                <th>Body</th>
+                <th>Created</th>
+                <th>Validated</th>
+                <th>Content</th>
+              
+                @* @if (User.IsInRole("Admin"))*@
+
+                <th>Delete</th>
+
+
+                @* @if (User.IsInRole("Admin"))*@
+
+
+                <th>Update</th>
+
+
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td class="col-sm-6">@item.Header</td>
+                <td class="col-sm-6">@item.Body</td>
+                <td class="col-sm-6">@item.Created</td>
+                <td class="col-sm-6">@item.IsValid</td>
+                <td class="col-sm-6">@item.Content.ContentName</td>
+         
+
+                @* @if (User.IsInRole("Admin"))*@
+
+                <td><a id="delete" onclick="return confirm('Are you sure you want to delete this item?')" style="width:100%" href="/Dashboard/Delete/@item.InformationID" class="btn btn-danger">Delete</a></td>
+
+
+
+                @* @if (User.IsInRole("Admin"))*@
+
+
+                <td><a style="width:100%" href="/Visitor/GetById/@item.InformationID" class="btn btn-warning">Update</a></td>
+
+
+            </tr>
+        }
+    </table>
+</div>
+
+
+@*@if (User.IsInRole("Admin"))*@
+
+<a href="/Visitor/Add" class="btn btn-info">Add</a>
