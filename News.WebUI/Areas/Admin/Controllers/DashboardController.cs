@@ -39,6 +39,29 @@ namespace News.WebUI.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index),nameof(Admin));
         }
 
+        public async Task<IActionResult> Update(int id)
+        {
+            var news = await _mediator.Send(new GetNewsByIdQuerry { InformationID = id });
+            var contents = await _mediator.Send(new GetContentTypeQuerry());
+            var model = new InfoContentVM
+            {
+                Contents = contents,
+                Body=news.Body,
+                InformationID=id,
+                ContentID=news.ContentID,
+                IsValid=news.IsValid,
+                Header=news.Header,
+            };         
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult>Update(UpdateNewsCommand command)
+        {
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index), nameof(Admin));
+        }
+
     }
     
 }

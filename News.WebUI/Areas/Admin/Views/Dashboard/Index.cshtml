@@ -42,7 +42,7 @@
                         @(item.Body.Substring(0, 60) + "...")
                     }
                 </td>
-                <td class="col-sm-6">@item.Created</td>
+                <td class="col-sm-3">@item.Created.ToString("d MMM yyyy")
                 <td class="col-sm-6">@item.IsValid</td>
                 <td class="col-sm-6">@item.Content.ContentName</td>
 
@@ -56,7 +56,7 @@
                 @* @if (User.IsInRole("Admin"))*@
 
 
-                <td><a style="width:100%" href="/Visitor/GetById/@item.InformationID" class="btn btn-warning">Update</a></td>
+                <td><a style="width:100%" href="/Admin/Dashboard/Update/@item.InformationID" class="btn btn-warning">Update</a></td>
 
 
             </tr>
@@ -67,4 +67,4 @@
 
 @*@if (User.IsInRole("Admin"))*@
 
-<a href="Admin/Dashboard/Add" class="btn btn-info">Add</a>
+<a href="/Admin/Dashboard/Add" class="btn btn-info">Add</a>

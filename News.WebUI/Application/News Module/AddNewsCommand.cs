@@ -30,15 +30,15 @@ namespace News.WebUI.Application.News_Module
                 _context = context;
             }
 
-            public async Task<int> Handle(AddNewsCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(AddNewsCommand command, CancellationToken cancellationToken)
             {
                 var news = new Information
                 {
-                    Body = request.Body,
+                    Body = command.Body,
                     Created = DateTime.Now,
-                    Header = request.Header,
+                    Header = command.Header,
                     IsValid = false,
-                    ContentID = request.SelectedContentID
+                    ContentID = command.SelectedContentID
                 };
                 await _context.Informations.AddAsync(news);
                 await _context.SaveChangesAsync(cancellationToken);
