@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using News.WebUI.Application.News_Module;
 using News.WebUI.ViewModels;
+using System;
 using System.Threading.Tasks;
 
 namespace News.WebUI.Areas.Admin.Controllers
@@ -36,9 +36,8 @@ namespace News.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Add(AddNewsCommand command)
         {
             await _mediator.Send(command);
-            return RedirectToAction(nameof(Index),nameof(Admin));
-        }
-
+            return RedirectToAction(nameof(Index), "Dashboard", new { area = "Admin" });
+        } 
         public async Task<IActionResult> Update(int id)
         {
             var news = await _mediator.Send(new GetNewsByIdQuerry { InformationID = id });
@@ -59,8 +58,14 @@ namespace News.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult>Update(UpdateNewsCommand command)
         {
             await _mediator.Send(command);
-            return RedirectToAction(nameof(Index), nameof(Admin));
+            return RedirectToAction(nameof(Index), "Dashboard", new { area = "Admin" });
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _mediator.Send(new DeleteNewsCommand { InformationID=id});
+            return RedirectToAction(nameof(Index), "Dashboard", new { area = "Admin" });
+        }
+
 
     }
     

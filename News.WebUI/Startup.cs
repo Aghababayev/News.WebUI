@@ -29,7 +29,8 @@ namespace News.WebUI
             services.AddControllersWithViews();
             string connection = Configuration.GetConnectionString("Connnection");
             services.AddDbContext<Context>(opt => opt.UseSqlServer(connection));
-            services.AddMediatR(cfg => {
+            services.AddMediatR(cfg =>
+            {
                 cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
             });
 
@@ -58,13 +59,14 @@ namespace News.WebUI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                       name: "areas",
+                     pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+                                                                                        
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapControllerRoute(
-           name: "areas",
-           pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
-         );
+
             });
         }
     }

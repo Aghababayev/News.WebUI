@@ -20,11 +20,11 @@
         <input type="hidden" asp-for="InformationID" />
         <label>Header</label>
         <br />
-        <input  asp-for="Header" type="text" class="form-control col-4" />
+        <input readonly asp-for="Header" type="text" class="form-control col-4" />
         <br />
         <label>Body</label>
         <br />
-        <textarea  asp-for="Body" rows="10" class="form-control col-8"></textarea>
+        <textarea readonly asp-for="Body" rows="10" class="form-control col-8"></textarea>
         <br />
         <select asp-for="@Model.ContentID" class="form-control col-2">
             @foreach (var item in Model.Contents)

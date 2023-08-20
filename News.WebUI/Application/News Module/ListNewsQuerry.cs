@@ -4,6 +4,7 @@ using News.WebUI.DataAccess.Concrete;
 using News.WebUI.Entities.Concrete;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace News.WebUI.Application.News_Module
 
             public async Task<List<Information>> Handle(ListNewsQuerry request, CancellationToken cancellationToken)
             {
-                var values = await _context.Informations.Include(x=>x.Content).ToListAsync();
+                var values = await _context.Informations.Include(x=>x.Content).OrderBy(c=>c.IsValid).ToListAsync();
                 return values;
             }
         }
