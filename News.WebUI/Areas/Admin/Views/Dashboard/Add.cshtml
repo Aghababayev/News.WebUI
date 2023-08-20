@@ -17,31 +17,25 @@
     </style>
 
 
-    <form class="form-group " method="post">
-
+    <form class="form-group " name="InfoContentVM" method="post">
         <input type="hidden" />
         <label>Header</label>
         <br />
-        <input asp-for="Information.Header" type="text" class="form-control col-4" />
+        <input asp-for="Header" type="text" class="form-control col-4" />
         <br />
         <label>Body</label>
         <br />
-        <textarea asp-for="Information.Body" class="form-control col-4"></textarea>
-
+        <textarea  asp-for="Body" class="form-control col-4"></textarea>
         <br />
-        <select class="form-control col-2">
+        <select asp-for="SelectedContentID" class="form-control col-2">
             @foreach (var item in Model.Contents)
             {
-                <option value="@item.ContentID">@item.ContentName</option>
+                <option  value="@item.ContentID">@item.ContentName</option>
             }
-            
-
         </select>
         <br />
-
         <button class="  btn  btn-success">ADD</button>
 
-
-        <a style="margin-left:1%" href="/Visitor/Index" class="btn btn-info">BACK</a>
+        <a style="margin-left:1%" href="/Dashboard/Index" class="btn btn-info">BACK</a>
     </form>
 </div>

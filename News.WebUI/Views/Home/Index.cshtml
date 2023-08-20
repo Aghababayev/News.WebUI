@@ -1,8 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<Information>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container-fluid">
+    <table id="tbl1" class="table table-light table-bordered table-hover" style="margin-top:20px">
+        <thead>
+            <tr>
+                <th>Header</th>
+                <th>Body</th>
+                <th>Posted</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-sm-4">@item.Header</td>
+                <td class="col-sm-6">
+                    @if (item.Body.Length <= 120)
+                    {
+                        @item.Body
+                    }
+                    else
+                    {
+                        @(item.Body.Substring(0, 120) + "...")
+                    }
+                    <a style="width:100%" href="/Home/Index/@item.InformationID" class="btn btn-warning"></a>
+                </td>
+                <td class="col-sm-3">@item.Created.ToString("d MMM yyyy")
+
+            </td>
+                <td class="col-sm-2">@item.Content.ContentName</td>
+            </tr>
+        }
+    </table>
 </div>
+

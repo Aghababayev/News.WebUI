@@ -20,6 +20,7 @@ namespace News.WebUI.Areas.Admin.Controllers
             var values = await _mediator.Send(new ListNewsQuerry());
             return View(values);
         }
+
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -29,11 +30,15 @@ namespace News.WebUI.Areas.Admin.Controllers
                 Contents = contents
             };
             return View(model);
-
         }
-        
-        
-       
+
+        [HttpPost]
+        public async Task<IActionResult> Add(AddNewsCommand command)
+        {
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Index),nameof(Admin));
+        }
+
     }
     
 }
