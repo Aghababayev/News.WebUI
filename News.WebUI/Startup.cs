@@ -67,12 +67,9 @@ namespace News.WebUI
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            app.UseRouting();
             app.UseAuthentication();
+            app.UseRouting();      
             app.UseAuthorization();
-            
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
