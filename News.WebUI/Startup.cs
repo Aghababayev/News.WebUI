@@ -32,14 +32,19 @@ namespace News.WebUI
             services.AddControllersWithViews();
             string connection = Configuration.GetConnectionString("Connnection");
             services.AddDbContext<Context>(opt => opt.UseSqlServer(connection));
+            services.AddHttpContextAccessor();
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
             });
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-              .AddCookie(x =>
+              .AddCookie(options =>
               {
-                  x.LoginPath = "/Admin/Login/Index";
+                  options.LoginPath = "/Admin/Login/Index";
+                  options.ExpireTimeSpan = TimeSpan.FromSeconds(10); // Set your desired expiration time
+                  options.SlidingExpiration = true; // Extend expiration time with activity
+                  options.Cookie.HttpOnly = true;
+                  options.Cookie.IsEssential = true;
               });
 
             services.AddMvc(config =>
@@ -70,6 +75,7 @@ namespace News.WebUI
             app.UseAuthentication();
             app.UseRouting();      
             app.UseAuthorization();
+          
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

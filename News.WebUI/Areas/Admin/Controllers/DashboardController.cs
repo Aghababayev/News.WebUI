@@ -1,13 +1,16 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using News.WebUI.Application.News_Module;
 using News.WebUI.ViewModels;
 using System;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace News.WebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Accessor,Moderator")]
     public class DashboardController : Controller
     {
         private readonly IMediator _mediator; 

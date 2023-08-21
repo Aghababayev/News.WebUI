@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using News.WebUI.Application.Reader_Module;
@@ -11,11 +12,12 @@ using System.Threading.Tasks;
 
 namespace News.WebUI.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMediator _mediator;
-  
+   
         public HomeController(ILogger<HomeController> logger, IMediator mediator)
         {
             _mediator = mediator;
