@@ -25,6 +25,7 @@ namespace News.WebUI.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Add()
         {
             var contents = await _mediator.Send(new GetContentTypeQuerry());
@@ -36,6 +37,7 @@ namespace News.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Add(AddNewsCommand command)
         {
             await _mediator.Send(command);

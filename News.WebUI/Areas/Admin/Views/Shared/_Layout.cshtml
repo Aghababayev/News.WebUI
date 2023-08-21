@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,6 +9,9 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    @{
+        var userRole = User.FindFirstValue(ClaimTypes.Role);
+    }
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -32,8 +36,9 @@
                         }                 
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/Admin/Login/Logout">LogOut</a>
-                        </li>                 
+                        </li>  
                     </ul>
+                    <h3 style="color:limegreen">Welcome @userRole</h3>
                 </div>
             </div>
         </nav>
