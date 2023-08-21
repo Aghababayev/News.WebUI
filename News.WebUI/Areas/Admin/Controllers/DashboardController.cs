@@ -58,11 +58,13 @@ namespace News.WebUI.Areas.Admin.Controllers
         }
 
         [HttpPost]
+
         public async Task<IActionResult>Update(UpdateNewsCommand command)
         {
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index), "Dashboard", new { area = "Admin" });
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             await _mediator.Send(new DeleteNewsCommand { InformationID=id});

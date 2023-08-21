@@ -23,7 +23,6 @@ namespace News.WebUI
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -41,12 +40,11 @@ namespace News.WebUI
               .AddCookie(options =>
               {
                   options.LoginPath = "/Admin/Login/Index";
-                  options.ExpireTimeSpan = TimeSpan.FromSeconds(10); // Set your desired expiration time
-                  options.SlidingExpiration = true; // Extend expiration time with activity
+                  options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
+                  options.SlidingExpiration = true;
                   options.Cookie.HttpOnly = true;
                   options.Cookie.IsEssential = true;
               });
-
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -56,8 +54,6 @@ namespace News.WebUI
 
             });
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -73,15 +69,15 @@ namespace News.WebUI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseRouting();      
+            app.UseRouting();
             app.UseAuthorization();
-          
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                        name: "areas",
                      pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
-                                                                                        
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

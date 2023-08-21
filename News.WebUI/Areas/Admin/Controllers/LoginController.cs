@@ -40,7 +40,7 @@ namespace News.WebUI.Areas.Admin.Controllers
             {
                 if (statusCodeResult.StatusCode == 401)
                 {
-                    ViewBag.ErrorMesage = "Password or Username is wrong";
+                    ViewBag.ErrorMesage = "Username or Password  is wrong";
                     return View();
                 } 
             }

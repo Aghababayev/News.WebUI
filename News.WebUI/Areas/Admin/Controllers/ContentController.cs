@@ -49,6 +49,7 @@ namespace News.WebUI.Areas.Admin.Controllers
             await _mediator.Send(command);
             return RedirectToAction(nameof(Index), nameof(Content), new { area = "Admin" });
         }
+
         public async Task<IActionResult> Delete(int id)
         {
             await _mediator.Send(new DeleteContentCommand { ContentID = id });

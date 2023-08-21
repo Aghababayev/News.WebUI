@@ -23,7 +23,7 @@ namespace News.WebUI.Application.News_Module
 
             public async Task<List<Information>> Handle(ListNewsQuerry request, CancellationToken cancellationToken)
             {
-                var values = await _context.Informations.Include(x=>x.Content).OrderBy(c=>c.IsValid).ToListAsync();
+                var values = await _context.Informations.Include(x=>x.Content).OrderBy(c=>c.IsValid).ThenBy(c=>c.Created).ToListAsync();
                 return values;
             }
         }
