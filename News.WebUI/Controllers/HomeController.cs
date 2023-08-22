@@ -30,8 +30,9 @@ namespace News.WebUI.Controllers
             return View(values);
         }
 
-       public async Task<IActionResult> GetByContentId(int Id)
+       public async Task<IActionResult> GetByContentId()
         {
+            var values = await _mediator.Send(new GetContentIdByActiveNewsQuerry());
             return null;
         }
     }
