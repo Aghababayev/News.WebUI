@@ -29,10 +29,11 @@ namespace News.WebUI.Application.Reader_Module
                                                        .Include(info => info.Content)
                                                        .Select(info => new Content
                                                        {
-                                                       ContentID = info.Content.ContentID,
-                                                       ContentName = info.Content.ContentName
+                                                           ContentID = info.Content.ContentID,
+                                                           ContentName = info.Content.ContentName
                                                        })
-                                                      .ToListAsync(cancellationToken);             
+                                                      .Distinct()
+                                                      .ToListAsync(cancellationToken);
                 return value;
             }
         }
