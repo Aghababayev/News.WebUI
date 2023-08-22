@@ -40,11 +40,11 @@ Author URL: http://w3layouts.com
                     {
                         <div class="col-lg-4 col-md-4 col-6">
                             <div class="column">
-                                <a href="blog-single.html"><img src="/Traversal-Starter/assets/images/g1.jpg" alt="" class="img-fluid"></a>
+                                <a href="/Home/GetByInformatioId/@item.InformationID"><img src="/Traversal-Starter/assets/images/g1.jpg" alt="" class="img-fluid"></a>
                                 <div class="info">
                                     <h2>@item.Header</h2>
                                     <p>
-                                        <a href="">@(item.Body.Length > 100 ? $"{item.Body.Substring(0, 100)}...Read more" : item.Body)</a>
+                                        <a href="/Home/GetByInformatioId/@item.InformationID">@(item.Body.Length > 100 ? $"{item.Body.Substring(0, 100)}..." : item.Body)</a>
                                     </p>
                                     <div class="dst-btm">
                                         <h5>@item.Created.ToString("dd MMM HH:mm") </h5>  <br />
@@ -52,15 +52,11 @@ Author URL: http://w3layouts.com
                                 </div>
                             </div>
                         </div>
-                      
                     }
                 </div>
             </div>
         </div>
     </section>
-
-
-
     <!--  //Work gallery section -->
     <!-- grids block 5 -->
     <!--/w3l-footer-29-main-->
