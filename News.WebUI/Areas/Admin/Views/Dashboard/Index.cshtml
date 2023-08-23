@@ -32,18 +32,20 @@ Author URL: http://w3layouts.com
     }
     <section class="grids-1 py-5">
         <div class="grids py-lg-5 py-md-4">
-          
-            <div class="container">            
-                <div class="row ">               
+            <div class="container">  
+                
+                <div class="row ">   
+                    
                     @foreach (var item in Model)
                     {
                         <div class="col-lg-4 col-md-4 col-6">
                             <div class="column">
+                                <br>
                                 <a href="/Home/GetByInformatioId/@item.InformationID"><img src="@item.PictureURL" style="width:370px;height:270px" alt="" class="img-fluid"></a>
                                 <div class="info">
-                                    <h2>@(item.Body.Length > 40 ? $"{item.Body.Substring(0, 40)}..." : item.Body)</h2>
+                                    <h2>@(item.Header.Length > 20 ? $"{item.Header.Substring(0, 20)}..." : item.Header)</h2>
                                     <p>
-                                        <a href="/Home/GetByInformatioId/@item.InformationID">@(item.Body.Length > 100 ? $"{item.Body.Substring(0, 100)}..." : item.Body)</a>
+                                        <a href="/Home/GetByInformatioId/@item.InformationID">@(item.Body.Length > 40 ? $"{item.Body.Substring(0, 40)}..." : item.Body)</a>
                                     </p>
                                     <div class="dst-btm">
                                         <h5>@item.Created.ToString("dd MMM HH:mm") </h5>
@@ -51,6 +53,7 @@ Author URL: http://w3layouts.com
                                         <h5 style="color: @(item.IsValid ? "green" : "red")"> Status: @item.IsValid</h5>
                                         <br />
                                     </div>
+                                    <br>
                             
                                     @if (User.IsInRole("Admin"))
                                     {
@@ -61,6 +64,7 @@ Author URL: http://w3layouts.com
                             </div>
                         </div>
                     }
+
                 </div>
             </div>
         </div>

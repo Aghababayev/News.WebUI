@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using News.WebUI.Application.News_Module;
@@ -13,7 +14,7 @@ namespace News.WebUI.Areas.Admin.Controllers
     [Authorize(Roles = "Admin,Accessor,Moderator")]
     public class DashboardController : Controller
     {
-        private readonly IMediator _mediator; 
+        private readonly IMediator _mediator;
         public DashboardController(IMediator mediator)
         {
             _mediator = mediator;
@@ -40,9 +41,26 @@ namespace News.WebUI.Areas.Admin.Controllers
         [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Add(AddNewsCommand command)
         {
-            await _mediator.Send(command);
-            return RedirectToAction(nameof(Index), "Dashboard", new { area = "Admin" });
-        } 
+            try
+            {
+                await _mediator.Send(command);
+                return RedirectToAction(nameof(Index), "Dashboard", new { area = "Admin" });
+            }
+            catch (ValidationException ex)
+            {
+                foreach (var error in ex.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+                var contents = await _mediator.Send(new GetContentTypeQuerry());
+                var model = new InfoContentVM
+                {
+                    Contents = contents
+                };
+                return View(model);
+            }
+
+        }
         public async Task<IActionResult> Update(int id)
         {
             var news = await _mediator.Send(new GetNewsByIdQuerry { InformationID = id });
@@ -50,31 +68,55 @@ namespace News.WebUI.Areas.Admin.Controllers
             var model = new InfoContentVM
             {
                 Contents = contents,
-                Body=news.Body,
-                InformationID=id,
-                ContentID=news.ContentID,
-                IsValid=news.IsValid,
-                PictureURL=news.PictureURL,
-                 Header=news.Header,
-            };         
+                Body = news.Body,
+                InformationID = id,
+                ContentID = news.ContentID,
+                IsValid = news.IsValid,
+                PictureURL = news.PictureURL,
+                Header = news.Header,
+            };
             return View(model);
         }
 
         [HttpPost]
-
-        public async Task<IActionResult>Update(UpdateNewsCommand command)
+        public async Task<IActionResult> Update(UpdateNewsCommand command, int id)
         {
-            await _mediator.Send(command);
-            return RedirectToAction(nameof(Index), "Dashboard", new { area = "Admin" });
+            try
+            {
+                await _mediator.Send(command);
+                return RedirectToAction(nameof(Index), "Dashboard", new { area = "Admin" });
+            }
+            catch (ValidationException ex)
+            {
+                foreach (var error in ex.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+
+                var news = await _mediator.Send(new GetNewsByIdQuerry { InformationID = id });
+                var contents = await _mediator.Send(new GetContentTypeQuerry());
+                var model = new InfoContentVM
+                {
+                    Contents = contents,
+                    Body = news.Body,
+                    InformationID = id,
+                    ContentID = news.ContentID,
+                    IsValid = news.IsValid,
+                    PictureURL = news.PictureURL,
+                    Header = news.Header,
+                };
+                return View(model);
+            }
+
         }
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _mediator.Send(new DeleteNewsCommand { InformationID=id});
+            await _mediator.Send(new DeleteNewsCommand { InformationID = id });
             return RedirectToAction(nameof(Index), "Dashboard", new { area = "Admin" });
         }
 
 
     }
-    
+
 }

@@ -6,6 +6,8 @@ using System.Threading;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace News.WebUI.Application.News_Module
 {
@@ -22,27 +24,39 @@ namespace News.WebUI.Application.News_Module
         public class UpdateNewsCommandHandler : IRequestHandler<UpdateNewsCommand, int>
         {
             private readonly Context _context;
-
-            public UpdateNewsCommandHandler(Context context)
+            private readonly IValidator<UpdateNewsCommand> _validator;
+            public UpdateNewsCommandHandler(Context context, IValidator<UpdateNewsCommand> validator)
             {
                 _context = context;
+                _validator = validator;
             }
 
-            [HttpPost]
             public async Task<int> Handle(UpdateNewsCommand command, CancellationToken cancellationToken)
             {
-                var information = await _context.Informations.Where(x => x.InformationID == command.InformationID).FirstOrDefaultAsync();
-                if (information == null)
+                var validationResults = await _validator.ValidateAsync(command);
+                if (!validationResults.IsValid)
                 {
-                    return default;
+                    var validationFailures = validationResults.Errors
+                         .Select(error => new ValidationFailure(error.PropertyName, error.ErrorMessage))
+                         .ToList();
+                    throw new ValidationException(validationFailures);
                 }
-                information.Header = command.Header;
-                information.Body = command.Body;
-                information.ContentID = command.ContentID;
-                information.IsValid = command.IsValid;
-                information.PictureURL = command.PictureUrl;
-                await _context.SaveChangesAsync();
-                return information.InformationID;
+                else
+                {
+                    var information = await _context.Informations.Where(x => x.InformationID == command.InformationID).FirstOrDefaultAsync();
+                    if (information == null)
+                    {
+                        return default;
+                    }
+                    information.Header = command.Header;
+                    information.Body = command.Body;
+                    information.ContentID = command.ContentID;
+                    information.IsValid = command.IsValid;
+                    information.PictureURL = command.PictureUrl;
+                    await _context.SaveChangesAsync();
+                    return information.InformationID;
+                }
+              
             }
         }
     }

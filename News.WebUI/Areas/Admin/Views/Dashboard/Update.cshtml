@@ -21,10 +21,12 @@
         @if (!User.IsInRole("Moderator"))
         {
             <input readonly asp-for="Header" type="text" class="form-control col-4" />
+            <span asp-validation-for="Header" class="text-danger"></span>
         }
         else
         {
             <input asp-for="Header" type="text" class="form-control col-4" />
+            <span asp-validation-for="Header" class="text-danger"></span>
         }
         <br />
         @if (!User.IsInRole("Moderator"))
@@ -40,10 +42,12 @@
         @if (!User.IsInRole("Moderator"))
         {
             <textarea readonly asp-for="Body" rows="10" class="form-control col-8"></textarea>
+            <span asp-validation-for="Body" class="text-danger"></span>
         }
         else
         {
             <textarea asp-for="Body" rows="10" class="form-control col-8"></textarea>
+            <span asp-validation-for="Header" class="text-danger"></span>
         }
         <br />
         <select asp-for="@Model.ContentID" class="form-control col-2">

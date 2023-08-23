@@ -20,6 +20,7 @@
         <label>Header</label>
         <br />
         <input asp-for="Header" type="text" class="form-control col-4" />
+        <span asp-validation-for="Header" class="text-danger"></span>
         <br />
         <label>Picture URL</label>
         <br />
@@ -28,6 +29,7 @@
         <label>Body</label>
         <br />
         <textarea asp-for="Body" class="form-control col-6" rows="12"></textarea>
+        <span asp-validation-for="Body" class="text-danger"></span>
         <br />
         <select asp-for="SelectedContentID" class="form-control col-2">
             @foreach (var item in Model.Contents)
