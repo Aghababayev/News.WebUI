@@ -20,6 +20,7 @@
         <label>Content Name</label>
         <br />
         <input asp-for="ContentName" type="text" class="form-control col-4" />
+        <span asp-validation-for="ContentName" class="text-danger"></span>
         <br />
         <button class="  btn  btn-success">ADD</button>
         <a style="margin-left:1%" href="/Admin/Content/Index" class="btn btn-info">BACK</a>
