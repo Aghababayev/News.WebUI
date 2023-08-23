@@ -28,13 +28,18 @@ Author URL: http://w3layouts.com
 </head>
 
 <body>
-    <br />
+
     <section class="w3l-clients" id="clients">
-        <!-- /grids -->
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <div style="width: 1200px; height: 650px; border: 1px solid black; border-radius: 20px; margin-top: 100px; overflow: hidden;">
+                <img src="@Model.PictureURL" alt="Image" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
         <div class="cusrtomer-layout py-5">
+
             <div class="container py-lg-4 py-md-3 pb-lg-0">
                 <div class="heading text-center mx-auto">
-                    <h3 class="sub-title text-center">@Model.Header</h3>
+                    <h1 class="sub-title text-center">@Model.Header</h1>
                     <h3 class="hny-title mb-md-5 mb-4">@Model.Body</h3>
                 </div>
                 <div class="center" style=" display: flex;

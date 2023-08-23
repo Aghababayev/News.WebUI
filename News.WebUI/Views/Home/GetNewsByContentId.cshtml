@@ -40,9 +40,9 @@ Author URL: http://w3layouts.com
                             <div class="column">
                                 <a href="/Home/GetByInformatioId/@item.InformationID"><img src="@item.PictureURL" style="width:370px;height:270px" alt="" class="img-fluid"></a>
                                 <div class="info">
-                                    <h2>@(item.Body.Length > 40 ? $"{item.Body.Substring(0, 40)}..." : item.Body)</h2>
+                                    <h2>@(item.Header.Length > 20 ? $"{item.Header.Substring(0, 20)}..." : item.Header)</h2>
                                     <p>
-                                        <a href="/Home/GetByInformatioId/@item.InformationID">@(item.Body.Length > 100 ? $"{item.Body.Substring(0, 100)}..." : item.Body)</a>
+                                        <a href="/Home/GetByInformatioId/@item.InformationID">@(item.Body.Length > 40 ? $"{item.Body.Substring(0, 40)}..." : item.Body)</a>
                                     </p>
                                     <div class="dst-btm">
                                         <h5>@item.Created.ToString("dd MMM HH:mm") </h5>
