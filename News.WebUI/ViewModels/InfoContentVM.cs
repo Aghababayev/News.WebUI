@@ -16,6 +16,7 @@ namespace News.WebUI.ViewModels
         public DateTime Created { get; set; }
         public bool IsValid { get; set; }
         public int ContentID { get; set; }
+        public string PictureURL { get;set; }
         public ICollection<Content> Contents { get; set; }
         public int SelectedContentID { get; set; }
     }

@@ -19,6 +19,7 @@ namespace News.WebUI.Application.News_Module
         public bool IsValid { get; set; } 
         public int ContentID { get; set; }
         public int SelectedContentID { get; set; }
+        public string PictureUrl { get; set; } 
 
 
         public class AddNewsCommandHandler : IRequestHandler<AddNewsCommand, int>
@@ -37,8 +38,10 @@ namespace News.WebUI.Application.News_Module
                     Body = command.Body,
                     Created = DateTime.Now,
                     Header = command.Header,
+                    PictureURL=command.PictureUrl,
                     IsValid = false,
                     ContentID = command.SelectedContentID
+                    
                 };
                 await _context.Informations.AddAsync(news);
                 await _context.SaveChangesAsync(cancellationToken);

@@ -17,6 +17,7 @@ namespace News.WebUI.Application.News_Module
         public DateTime Created { get; set; }
         public bool IsValid { get; set; }
         public int ContentID { get; set; }
+        public string PictureURL { get; set; }
         public int SelectedContentID { get; set; }
 
         public class GetNewsByIdQuerryHandler : IRequestHandler<GetNewsByIdQuerry, Information>

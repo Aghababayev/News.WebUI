@@ -27,6 +27,14 @@
             <input asp-for="Header" type="text" class="form-control col-4" />
         }
         <br />
+        @if (!User.IsInRole("Moderator"))
+        {
+            <input readonly asp-for="PictureURL" type="text" class="form-control col-4" />
+        }
+        else
+        {
+            <input asp-for="PictureURL" type="text" class="form-control col-4" />
+        }<br />
         <label>Body</label>
         <br />
         @if (!User.IsInRole("Moderator"))

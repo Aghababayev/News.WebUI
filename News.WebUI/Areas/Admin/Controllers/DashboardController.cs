@@ -54,7 +54,8 @@ namespace News.WebUI.Areas.Admin.Controllers
                 InformationID=id,
                 ContentID=news.ContentID,
                 IsValid=news.IsValid,
-                Header=news.Header,
+                PictureURL=news.PictureURL,
+                 Header=news.Header,
             };         
             return View(model);
         }
