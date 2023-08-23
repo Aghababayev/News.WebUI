@@ -26,11 +26,15 @@ Author URL: http://w3layouts.com
 
     <!-- //about breadcrumb -->
     <!--  Work gallery section -->
+    @if (User.IsInRole("Moderator"))
+    {
+        <a href="/Admin/Dashboard/Add" class="btn btn-info">Add</a>
+    }
     <section class="grids-1 py-5">
         <div class="grids py-lg-5 py-md-4">
-            <div class="container">
-                <div class="row ">
-
+          
+            <div class="container">            
+                <div class="row ">               
                     @foreach (var item in Model)
                     {
                         <div class="col-lg-4 col-md-4 col-6">
@@ -44,6 +48,7 @@ Author URL: http://w3layouts.com
                                     <div class="dst-btm">
                                         <h5>@item.Created.ToString("dd MMM HH:mm") </h5>
                                         <h5>@item.Content.ContentName</h5>
+                                        <h5 style="color: @(item.IsValid ? "green" : "red")"> Status: @item.IsValid</h5>
                                         <br />
                                     </div>
                             
@@ -60,10 +65,7 @@ Author URL: http://w3layouts.com
             </div>
         </div>
     </section>
-    @if (User.IsInRole("Moderator"))
-    {
-        <a href="/Admin/Dashboard/Add" class="btn btn-info">Add</a>
-    }
+    
     <!--  //Work gallery section -->
     <!-- grids block 5 -->
     <!--/w3l-footer-29-main-->
@@ -172,58 +174,4 @@ Author URL: http://w3layouts.com
 
 
 
-
-
-@*@model List<Information>
-
-
-<div class="container-fluid">
-    <table id="tbl1" class="table table-light table-bordered table-hover" style="margin-top:20px">
-        <thead>
-            <tr>
-                <th>Header</th>
-                <th>Body</th>
-                <th>Created</th>
-                <th>Validated</th>
-                <th>Content</th>
-                @if (User.IsInRole("Admin"))
-                {
-                    <th>Delete</th>
-                }
-                <th>Update</th>
-            </tr>
-        </thead>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td class="col-sm-6">@item.Header</td>
-                <td>
-                    @if (item.Body.Length <= 60)
-                    {
-                        @item.Body
-                    }
-                    else
-                    {
-                        @(item.Body.Substring(0, 60) + "...")
-                    }
-                </td>
-                <td class="col-sm-3">@item.Created.ToString("d MMM yyyy")
-                <td class="col-sm-6">@item.IsValid</td>
-                <td class="col-sm-6">@item.Content.ContentName</td>
-                    @if (User.IsInRole("Admin"))
-                    {
-                    <td><a id="delete" onclick="return confirm('Are you sure you want to delete this item?')" style="width:100%" href="/Admin/Dashboard/Delete/@item.InformationID" class="btn btn-danger">Delete</a></td>
-
-                    }
-
-                <td><a style="width:100%" href="/Admin/Dashboard/Update/@item.InformationID" class="btn btn-warning">Update</a></td>
-            </tr>
-        }
-    </table>
-</div>
-@if (User.IsInRole("Moderator"))
-{
-    <a href="/Admin/Dashboard/Add" class="btn btn-info">Add</a>
-}
-*@
 
