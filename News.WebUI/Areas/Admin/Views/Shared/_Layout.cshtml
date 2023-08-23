@@ -21,23 +21,16 @@
         var userRole = User.FindFirstValue(ClaimTypes.Role);
     }
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="~/Contact/Index">COMPANY</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
+        <a class="navbar-brand" href="~/Home/Index">NEWS</a><button class="btn btn-default btn-sm order-1 order-lg-0" id="sidebarToggle">
             <i class="fas fa-bars"></i>
         </button>
         <div style="margin-left:80%">
-            <ul class="navbar-nav ml-auto ml-md-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <p class="dropdown-item">
-                            <i class="fas fa-user"></i> Role: @userRole </>
-                        </p>
+            <a style="text-decoration: none;
+        color: #FF8000; /* Set your desired text color */
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;" href="/Admin/Login/Logout">Logout </a>
 
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/Admin/Login/Logout">Logout  <i class="fas fa-sign-out-alt"></i></a>
-                    </div>
-                </li>
-            </ul>
         </div>
     </nav>
     <div id="layoutSidenav">
@@ -48,7 +41,7 @@
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">
                             <h5 style="color:#FF8000; text-align:center;">Welcome, @userRole </h5>
-                            <a class="nav-link" href="/Admin/Index/">
+                            <a class="nav-link" href="/Admin/Dashboard/Index/">
                                 <div class="sb-nav-link-icon"></div>
                                 DASHBOARD
                             </a>
@@ -59,9 +52,9 @@
                                     CONTENT
                                 </a>
                             }
+                        </div>
                     </div>
                 </div>
-           
             </nav>
         </div>
         <div id="layoutSidenav_content">
@@ -70,9 +63,9 @@
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Web Site Designed by Nurlan Aghababayev 2021</div>
+                        <div class="text-muted">Copyright &copy; Web Site Designed by Nurlan Aghababayev 2023</div>
 
-                   
+
                     </div>
                 </div>
             </footer>
