@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using News.WebUI.Areas.Admin.Controllers;
 using News.WebUI.DataAccess.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -31,7 +32,10 @@ namespace News.WebUI.Application.Login_Module
         }
         public async Task<IActionResult> Handle(LoginCommand command, CancellationToken cancellationToken)
         {
-            var value = _context.Users.FirstOrDefault(x => x.UserName == command.UserName && x.Password == command.Password);
+              var value = _context.Users.AsEnumerable().FirstOrDefault(x =>
+              x.UserName.Equals(command.UserName, StringComparison.Ordinal) &&
+              x.Password.Equals(command.Password, StringComparison.Ordinal));
+
             if (value != null)
             {
                 var claims = new List<Claim>
