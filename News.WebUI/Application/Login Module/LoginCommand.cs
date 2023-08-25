@@ -32,9 +32,9 @@ namespace News.WebUI.Application.Login_Module
         }
         public async Task<IActionResult> Handle(LoginCommand command, CancellationToken cancellationToken)
         {
-            var value = _context.Users.AsEnumerable().FirstOrDefault(x =>
-     x.UserName.Equals(command.UserName, StringComparison.Ordinal) &&
-     x.Password.Equals(command.Password, StringComparison.Ordinal));
+              var value = _context.Users.AsEnumerable().FirstOrDefault(x =>
+              x.UserName.Equals(command.UserName, StringComparison.Ordinal) &&
+              x.Password.Equals(command.Password, StringComparison.Ordinal));
 
             if (value != null)
             {
