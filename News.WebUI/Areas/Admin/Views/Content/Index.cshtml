@@ -2,20 +2,20 @@
 
 
 <div class="container-fluid">
-    <table id="tbl1" class="table table-light table-bordered table-hover" style="margin-top:20px">
+    <table id="tbl1" class="table  table-bordered table-hover" style="margin-top:20px">
         <thead>
             <tr>
-                <th>ContentID</th>
-                <th>Content Name</th>       
-                <th>Delete</th>
-                <th>Update</th>
+                <th><h6>ContentID</h6></th>
+                <th><h6>Content Name</h6></th>
+                <th> <h6>Delete</h6></th>
+                <th> <h6>Update</h6></th>
             </tr>
         </thead>
         @foreach (var item in Model)
         {
             <tr>
-                <td class="col-sm-6">@item.ContentID</td>  
-                <td class="col-sm-3">@item.ContentName
+                <td class="col-sm-6"><h6>@item.ContentID</h6></td>
+                <td class="col-sm-3"><h6>@item.ContentName</h6></td>
                 <td><a id="delete" onclick="return confirm('The deletion process can directly affect the NEWS table. Delete? style="width:100%" href="/Admin/Content/Delete/@item.ContentID" class="btn btn-danger">Delete</a></td>
                 <td><a style="width:100%" href="/Admin/Content/Update/@item.ContentID" class="btn btn-warning">Update</a></td>
             </tr>
