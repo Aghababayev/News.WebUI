@@ -21,6 +21,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Error\css\fontAwesome.css" />
+    <None Include="wwwroot\Error\css\style.css" />
+    <None Include="wwwroot\Error\fonts\fontawesome-webfont.eot" />
+    <None Include="wwwroot\Error\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\Error\fonts\fontawesome-webfont.ttf" />
+    <None Include="wwwroot\Error\fonts\fontawesome-webfont.woff" />
+    <None Include="wwwroot\Error\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\Error\fonts\FontAwesome.otf" />
+    <None Include="wwwroot\Error\images\bg.jpg" />
+    <None Include="wwwroot\Error\index.html" />
+    <None Include="wwwroot\Error\js\jquery-3.3.1.min.js" />
+    <None Include="wwwroot\Error\starter-license-W3Layouts.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.7.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />

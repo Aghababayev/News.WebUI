@@ -37,5 +37,10 @@ namespace News.WebUI.Controllers
             var values = await _mediator.Send(new GetNewsByContetIdQuerry { ContentID=id});
             return View(values);
         }
+       
+        public IActionResult Error(int statusCode)
+        {
+            return View(statusCode);
+        }
     }
 }

@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords"
+          content="Fog error web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Error/css/style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="/Error/css/fontAwesome.css" type="text/css" media="all" />
+</head>
+<body>
+    <div class="w3l-error-block">
+
+        <div class="page">
+            <div class="content">
+                <div class="logo">
+                    <a class="brand-logo" href="index.html">Fog Error</a>
+                </div>
+                <div class="w3l-error-grid">
+                    <h1>404</h1>
+                    <h2>Page not found</h2>
+                    <p>I tried to catch some fog, but i missed it</p>
+                    <a href="/Home/Index" class="home">Back to Home</a>
+                </div>
+            </div>
+            <img src="/Error/images/bg.jpg" class="img-responsive" alt="error image" />
+        </div>
+        <script src="/Error/js/jquery-3.3.1.min.js"></script>
+        <script>
+            var lFollowX = 0,
+                lFollowY = 0,
+                x = 0,
+                y = 0,
+                friction = 1 / 30;
+
+            function animate() {
+                x += (lFollowX - x) * friction;
+                y += (lFollowY - y) * friction;
+
+                translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+                $('img').css({
+                    '-webit-transform': translate,
+                    '-moz-transform': translate,
+                    'transform': translate
+                });
+
+                window.requestAnimationFrame(animate);
+            }
+
+            $(window).on('mousemove click', function (e) {
+
+                var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+                var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+                lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+                lFollowY = (10 * lMouseY) / 100;
+
+            });
+
+            animate();
+        </script>
+    </div>
+</body>
+
+</html>
