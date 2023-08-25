@@ -59,6 +59,10 @@ namespace News.WebUI.Application.News_Module
                         string filePath = Path.Combine(folderPath, fileName);
                         pictureUrl = filePath;
                     }
+                    else
+                    {
+                        pictureUrl = command.PictureUrl;
+                    }
                     information.Header = command.Header;
                     information.Body = command.Body;
                     information.ContentID = command.ContentID;

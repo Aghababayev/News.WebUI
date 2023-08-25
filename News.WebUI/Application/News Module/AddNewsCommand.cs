@@ -63,7 +63,6 @@ namespace News.WebUI.Application.News_Module
                         ContentID = command.SelectedContentID
 
                     };
-                    string pictureUrl = null;
                     if (command.PictureUrlFile != null && command.PictureUrlFile.Length > 0)
                     {
                         string folderPath = "/images/";
