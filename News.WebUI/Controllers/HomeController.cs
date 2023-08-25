@@ -22,13 +22,11 @@ namespace News.WebUI.Controllers
         {
             _mediator = mediator;     
         }
-
         public  async Task<IActionResult> Index()
         {
             var values = await _mediator.Send(new ListMainNewsQuerry());
             return View(values);
         }
-
         public async Task<IActionResult> GetByInformatioId(int id)
         {
             var value = await _mediator.Send(new GetByInformatioIdQuerry { InformationID = id });

@@ -3,7 +3,7 @@ using News.WebUI.Application.News_Module;
 
 namespace News.WebUI.Validators.NewsValidator
 {
-    public class NewsAddValidator:AbstractValidator<AddNewsCommand>
+    public class NewsAddValidator : AbstractValidator<AddNewsCommand>
     {
         public NewsAddValidator()
         {

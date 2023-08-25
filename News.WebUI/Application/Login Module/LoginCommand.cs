@@ -10,7 +10,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
-
 namespace News.WebUI.Application.Login_Module
 {
     public class LoginCommand : IRequest<IActionResult>
@@ -19,7 +18,6 @@ namespace News.WebUI.Application.Login_Module
         public string Password { get; set; }
         public string Role { get; set; }
     }
-
     public class LoginCommandHandler : IRequestHandler<LoginCommand, IActionResult>
     {
         private readonly Context _context;
@@ -44,10 +42,8 @@ namespace News.WebUI.Application.Login_Module
                     new Claim(ClaimTypes.Role, value.Role),
                 };
                 var useridentity = new ClaimsIdentity(claims, "Login");
-
                 ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
                 await _httpContextAccessor.HttpContext.SignInAsync(principal);
-
                 return new RedirectToActionResult(nameof(DashboardController.Index), "Dashboard", new { area = "Admin" });
             }
             return new UnauthorizedResult();
