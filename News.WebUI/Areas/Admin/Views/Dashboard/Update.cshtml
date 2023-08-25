@@ -31,7 +31,7 @@
         <br />
         @if (!User.IsInRole("Moderator"))
         {
-            <input readonly asp-for="PictureURL" type="file" class="form-control col-4"   />
+            <input readonly asp-for="PictureURL" type="text" class="form-control col-4"   />
         }
         else
         {
