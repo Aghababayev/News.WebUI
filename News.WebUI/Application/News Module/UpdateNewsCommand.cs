@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using FluentValidation;
 using FluentValidation.Results;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace News.WebUI.Application.News_Module
 {
@@ -21,6 +23,7 @@ namespace News.WebUI.Application.News_Module
         public int ContentID { get; set; }
         public string PictureUrl { get; set; }
         public int SelectedContentID { get; set; }
+        public IFormFile PictureUrlFile { get; set; }
         public class UpdateNewsCommandHandler : IRequestHandler<UpdateNewsCommand, int>
         {
             private readonly Context _context;
@@ -48,11 +51,20 @@ namespace News.WebUI.Application.News_Module
                     {
                         return default;
                     }
+                    string pictureUrl = null;
+                    if (command.PictureUrlFile != null && command.PictureUrlFile.Length > 0)
+                    {
+                        string folderPath = "/images/";
+                        string fileName = Path.GetFileName(command.PictureUrlFile.FileName);
+                        string filePath = Path.Combine(folderPath, fileName);
+                        pictureUrl = filePath;
+                    }
                     information.Header = command.Header;
                     information.Body = command.Body;
                     information.ContentID = command.ContentID;
                     information.IsValid = command.IsValid;
                     information.PictureURL = command.PictureUrl;
+                    information.PictureURL = pictureUrl;
                     await _context.SaveChangesAsync();
                     return information.InformationID;
                 }

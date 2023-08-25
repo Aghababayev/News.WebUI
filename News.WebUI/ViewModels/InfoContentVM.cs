@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.VisualBasic;
 using News.WebUI.Entities.Concrete;
 using System;
 using System.Collections;
@@ -19,5 +20,6 @@ namespace News.WebUI.ViewModels
         public string PictureURL { get;set; }
         public ICollection<Content> Contents { get; set; }
         public int SelectedContentID { get; set; }
+        public IFormFile PictureUrlFile { get; set; }
     }
 }

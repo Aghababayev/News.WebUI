@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using News.WebUI.Application.Contents_Module;
@@ -8,6 +10,7 @@ using News.WebUI.DataAccess.Concrete;
 using News.WebUI.Entities.Concrete;
 using News.WebUI.ViewModels;
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,16 +27,19 @@ namespace News.WebUI.Application.News_Module
         public int ContentID { get; set; }
         public int SelectedContentID { get; set; }
         public string PictureUrl { get; set; }
+        public IFormFile PictureUrlFile { get; set; }
 
 
         public class AddNewsCommandHandler : IRequestHandler<AddNewsCommand, int>
         {
             private readonly Context _context;
             private readonly IValidator<AddNewsCommand> _validator;
+
             public AddNewsCommandHandler(Context context, IValidator<AddNewsCommand> validator)
             {
                 _context = context;
                 _validator = validator;
+
             }
 
             public async Task<int> Handle(AddNewsCommand command, CancellationToken cancellationToken)
@@ -53,18 +59,27 @@ namespace News.WebUI.Application.News_Module
                         Body = command.Body,
                         Created = DateTime.Now,
                         Header = command.Header,
-                        PictureURL = command.PictureUrl,
                         IsValid = false,
                         ContentID = command.SelectedContentID
 
                     };
+                    string pictureUrl = null;
+                    if (command.PictureUrlFile != null && command.PictureUrlFile.Length > 0)
+                    {
+                        string folderPath = "/images/";
+                        string fileName = Path.GetFileName(command.PictureUrlFile.FileName);
+                        string filePath = Path.Combine(folderPath, fileName);    
+                        news.PictureURL = filePath; 
+                    }
                     await _context.Informations.AddAsync(news);
                     await _context.SaveChangesAsync(cancellationToken);
                     return news.InformationID;
                 }
 
             }
+
         }
     }
-
 }
+
+

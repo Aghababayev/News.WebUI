@@ -14,7 +14,7 @@
             color: red
         }
     </style>
-    <form class="form-group " method="post">
+    <form class="form-group " method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="InformationID" />
         <label>Header</label>
         <br />
@@ -31,11 +31,11 @@
         <br />
         @if (!User.IsInRole("Moderator"))
         {
-            <input readonly asp-for="PictureURL" type="text" class="form-control col-4" />
+            <input readonly asp-for="PictureURL" type="file" class="form-control col-4"   />
         }
         else
         {
-            <input asp-for="PictureURL" type="text" class="form-control col-4" />
+            <input asp-for="PictureUrlFile" required type="file" class="form-control col-4" />
         }<br />
         <label>Body</label>
         <br />
