@@ -11,6 +11,8 @@ namespace News.WebUI.Application.Contents_Module
     public class GetContentByIdQuerry:IRequest<Content>
     {
         public int ContentID { get; set; }
+        public int UserID { get; internal set; }
+
         public class GetContentByIdQuerryHandler : IRequestHandler<GetContentByIdQuerry, Content>
         {
             private readonly Context _context;

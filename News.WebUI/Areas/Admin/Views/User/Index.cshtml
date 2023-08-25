@@ -1,0 +1,25 @@
+﻿@model List<User>
+<div class="container-fluid">
+    <table id="tbl1" class="table table-light table-bordered table-hover" style="margin-top:20px">
+        <thead>
+            <tr>
+                <th>UserID</th>
+                <th>User Name</th>
+                <th>Role</th>
+                <th>Update</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-sm-6">@item.UserID</td>
+                <td class="col-sm-3">@item.UserName</td>
+                <td class="col-sm-3">@item.Role</td>
+                <td><a style="width:100%" href="/Admin/User/Update/@item.UserID" class="btn btn-warning">Update</a></td>
+            </tr>
+        }
+    </table>
+</div>
+<script src="/Traversal-Starter/assets/js/theme-change.js"></script>
+<script src="/Traversal-Starter/assets/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/Traversal-Starter/assets/css/style-starter.css">
