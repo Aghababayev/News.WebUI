@@ -1,21 +1,21 @@
-﻿@model Content
-
+﻿@model User
 <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 <div class="container-fluid ">
     <style>
     </style>
     <form class="form-group " method="post">
-        <input type="hidden" asp-for="ContentID" />
-        <label>Content Name</label>
+        <input type="hidden" asp-for="UserID" />
+        <label>@Model.UserName</label>
         <br />
-        <input  asp-for="ContentName" type="text" class="form-control col-4" />
-        <span asp-validation-for="ContentName" class="text-danger"></span>
+        <label>Password</label>
+        <br />
+        <input asp-for="Password" type="text" class="form-control col-4" />
+        <span asp-validation-for="Password" class="text-danger"></span>
         <br />
         <button type="submit" class=" btn  btn-success">Update</button>
-        <a style="margin-left:1%" href="/Admin/Content/Index" class="btn btn-info">BACK</a>
+        <a style="margin-left:1%" href="/Admin/User/Index" class="btn btn-info">BACK</a>
     </form>
 </div>
-
 
 
 <script src="/Traversal-Starter/assets/js/theme-change.js"></script>

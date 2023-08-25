@@ -52,8 +52,8 @@ namespace News.WebUI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            var contents = await _mediator.Send(new GetContentByIdQuerry { ContentID = id });
-            return View(contents);
+            var content = await _mediator.Send(new GetContentByIdQuerry { ContentID = id });
+            return View(content);
         }
 
         [HttpPost]

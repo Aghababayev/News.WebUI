@@ -6,6 +6,7 @@ namespace News.WebUI.Entities.Concrete
     {
         [Key]
         public int UserID { get; set; }
+        public int UserId { get; internal set; }
         public string UserName { get; set; } 
         public string Password { get; set; }
         public string Role { get; set; }
