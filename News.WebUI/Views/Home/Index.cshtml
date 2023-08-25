@@ -28,9 +28,7 @@
                                 <a href="/Home/GetByInformatioId/@item.InformationID"><img src="@item.PictureURL" style="width:370px;height:270px" alt="" class="img-fluid"></a>
                                 <div class="info">
                                     <h4>@(item.Header.Length > 25 ? $"{item.Header.Substring(0, 25)}..." : item.Header)</h4>
-                                    <p>
-                                        <a href="/Home/GetByInformatioId/@item.InformationID">@(item.Body.Length > 100 ? $"{item.Body.Substring(0, 140)}..." : item.Body)</a>
-                                    </p>
+                                    <h6>@(item.Body.Length > 100 ? $"{item.Body.Substring(0, 140)}..." : item.Body)</h6>
                                     <div class="dst-btm">
                                         <h5 style="color:#178793">@item.Created.ToString("dd MMM HH:mm") </h5>
                                         <h5 style="color:dodgerblue">@item.Content.ContentName</h5>

@@ -41,7 +41,7 @@ namespace News.WebUI
               .AddCookie(options =>
               {
                   options.LoginPath = "/Admin/Login/Index";
-                  options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                  options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
                   options.SlidingExpiration = true;
                   options.Cookie.HttpOnly = true;
                   options.Cookie.IsEssential = true;
