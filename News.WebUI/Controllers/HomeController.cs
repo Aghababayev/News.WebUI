@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using News.WebUI.Application.Reader_Module;
+using News.WebUI.Application.Visitor_Module;
 using News.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -9,29 +13,31 @@ using System.Threading.Tasks;
 
 namespace News.WebUI.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IMediator _mediator;
+   
+        public HomeController(IMediator mediator)
         {
-            _logger = logger;
+            _mediator = mediator;     
         }
 
-        public IActionResult Index()
+        public  async Task<IActionResult> Index()
         {
-            return View();
+            var values = await _mediator.Send(new ListMainNewsQuerry());
+            return View(values);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> GetByInformatioId(int id)
         {
-            return View();
+            var value = await _mediator.Send(new GetByInformatioIdQuerry { InformationID = id });
+            return View(value);
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public async Task<IActionResult> GetNewsByContentId(int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var values = await _mediator.Send(new GetNewsByContetIdQuerry { ContentID=id});
+            return View(values);
         }
     }
 }

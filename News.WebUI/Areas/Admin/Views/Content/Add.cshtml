@@ -1,0 +1,28 @@
+﻿@model Content
+
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+
+<div class="container-fluid ">
+    <style>
+
+        select {
+            text-transform: capitalize
+        }
+
+        h3 {
+            color: red
+        }
+    </style>
+    <form class="form-group " method="post">
+        <input type="hidden" />
+        <label>Content Name</label>
+        <br />
+        <input asp-for="ContentName" type="text" class="form-control col-4" />
+        <span asp-validation-for="ContentName" class="text-danger"></span>
+        <br />
+        <button class="  btn  btn-success">ADD</button>
+        <a style="margin-left:1%" href="/Admin/Content/Index" class="btn btn-info">BACK</a>
+    </form>
+</div>

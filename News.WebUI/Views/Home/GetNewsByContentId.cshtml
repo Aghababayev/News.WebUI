@@ -1,0 +1,108 @@
+﻿@model List<Information>
+@{
+
+    Layout = "~/Views/Shared/_News_Layout.cshtml";
+}
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Traversal Travel Category Bootstrap Responsive Template | Destinations :: W3layouts</title>
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+          rel="stylesheet">
+    <!-- google fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/Traversal-Starter/assets/css/style-starter.css">
+    <!-- Template CSS -->
+</head>
+
+<body>
+
+    <!-- //about breadcrumb -->
+    <!--  Work gallery section -->
+    <section class="grids-1 py-5">
+        <div class="grids py-lg-5 py-md-4">
+            <div class="container">
+                <div class="row ">
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 col-md-4 col-6">
+                            <div class="column">
+                                <a href="/Home/GetByInformatioId/@item.InformationID"><img src="@item.PictureURL" style="width:370px;height:270px" alt="" class="img-fluid"></a>
+                                <div class="info">
+                                    <h2>@(item.Header.Length > 21 ? $"{item.Header.Substring(0, 21)}..." : item.Header)</h2>
+                                    <p>
+                                        <a href="/Home/GetByInformatioId/@item.InformationID">@(item.Body.Length > 45 ? $"{item.Body.Substring(0, 45)}..." : item.Body)</a>
+                                    </p>
+                                    <div class="dst-btm">
+                                        <h5>@item.Created.ToString("dd MMM HH:mm") </h5>
+                                        <h5>@item.Content.ContentName</h5>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--  //Work gallery section -->
+    <!-- grids block 5 -->
+    <!--/w3l-footer-29-main-->
+    @* <footer>
+    <!-- footer -->
+    @await Component.InvokeAsync("Footer")
+    <!-- //footer -->
+    </footer>*@
+
+    <!-- Template JavaScript -->
+    <script src="/Traversal-Starter/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/Traversal-Starter/assets/js/theme-change.js"></script>
+    <!--/MENU-JS-->
+    <script>
+        $(window).on("scroll", function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 80) {
+                $("#site-header").addClass("nav-fixed");
+            } else {
+                $("#site-header").removeClass("nav-fixed");
+            }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function () {
+            $("header").toggleClass("active");
+        });
+        $(document).on("ready", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+            $(window).on("resize", function () {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+            });
+        });
+    </script>
+    <!--//MENU-JS-->
+
+    <script src="/Traversal-Starter/assets/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+
+
+

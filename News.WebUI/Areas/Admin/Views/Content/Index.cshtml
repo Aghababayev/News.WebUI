@@ -1,0 +1,34 @@
+﻿@model List<Content>
+
+
+<div class="container-fluid">
+
+    @* <h3>Your overtime days: <span style="color:green">@ViewBag.CountOvertimes</span></h3>*@
+
+    <table id="tbl1" class="table table-light table-bordered table-hover" style="margin-top:20px">
+        <thead>
+            <tr>
+                <th>ContentID</th>
+                <th>Content Name</th>       
+                @* @if (User.IsInRole("Admin"))*@
+                <th>Delete</th>
+                @* @if (User.IsInRole("Admin"))*@
+
+                <th>Update</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="col-sm-6">@item.ContentID</td>  
+                <td class="col-sm-3">@item.ContentName
+                    @* @if (User.IsInRole("Admin"))*@
+                <td><a id="delete" onclick="return confirm('The deletion process can directly affect the NEWS table. Delete? style="width:100%" href="/Admin/Content/Delete/@item.ContentID" class="btn btn-danger">Delete</a></td>
+                    @* @if (User.IsInRole("Admin"))*@
+                <td><a style="width:100%" href="/Admin/Content/Update/@item.ContentID" class="btn btn-warning">Update</a></td>
+            </tr>
+        }
+    </table>
+</div>
+@*@if (User.IsInRole("Admin"))*@
+<a href="/Admin/Content/Add" class="btn btn-info">Add</a>

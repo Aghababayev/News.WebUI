@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Content>
+<ul class="navbar-nav mr-auto">
+    @foreach (var item in Model)
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="/Home/GetNewsByContentId/@item.ContentID">@item.ContentName</a>
+        </li>
+    }
+</ul>

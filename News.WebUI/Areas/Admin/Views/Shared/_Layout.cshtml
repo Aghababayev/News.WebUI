@@ -1,48 +1,100 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - News.WebUI</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">News.WebUI</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>NEWS</title>
+    <link href="~/dist/css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+@*    <style>
+        .btn-light {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - News.WebUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            .btn-light:hover {
+                background-color: #e74c3c; /* Bright red on hover */
+                color: #ffffff; /* White text on hover */
+            }
+    </style>*@
+</head>
+<body class="sb-nav-fixed">
+    @{
+        var userRole = User.FindFirstValue(ClaimTypes.Role);
+    }
+
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand" href="~/Home/Index">News</a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div style="position: absolute; top: 10px; right: 20px;">
+            <a class="btn-light"
+               style="display: inline-block; padding: 10px 20px; font-size: 16px; text-align: center; background-color: white; color: black; border: none; border-radius: 5px; transition: background-color 0.3s, color 0.3s;"
+               href="/Admin/Login/Logout"
+               onmouseover="this.style.color='red';"
+               onmouseout="this.style.color='black';">Logout</a>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">
+                            <h5 style="color:#FF8000; text-align:center;">Welcome, @userRole </h5>
+                            <a class="nav-link" href="/Admin/Dashboard/Index/">
+                                <div class="sb-nav-link-icon"></div>
+                              <h4 style="color:whitesmoke">DASHBOARD</h4>
+                            </a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a class="nav-link" href="/Admin/Content/Index">
+                                    <div class="sb-nav-link-icon"></div>
+                                    <h4 style ="color:whitesmoke">CONTENT</h4>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="sb-sidenav-dark">
+                    <div class="small">WELCOME</div>
+                    <br />
+                    <h6></h6>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            @RenderBody()
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Web Site Designed by Nurlan Aghababayev 2023</div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="~/dist/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/dist/assets/demo/chart-area-demo.js"></script>
+    <script src="~/dist/assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="~/dist/assets/demo/datatables-demo.js"></script>
 </body>
 </html>

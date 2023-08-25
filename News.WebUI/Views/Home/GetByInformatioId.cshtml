@@ -1,0 +1,134 @@
+﻿@model Information
+@{
+    Layout = "~/Views/Shared/_News_Layout.cshtml";
+}
+
+<!--
+
+
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Traversal Travel Category Bootstrap Responsive Template | Home :: W3layouts</title>
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+          rel="stylesheet">
+    <!-- google fonts -->
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/Traversal-Starter/assets/css/style-starter.css">
+    <!-- Template CSS -->
+</head>
+
+<body>
+
+    <section class="w3l-clients" id="clients">
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <div style="width: 1200px; height: 650px; border: 1px solid black; border-radius: 20px; margin-top: 100px; overflow: hidden;">
+                <img src="@Model.PictureURL" alt="Image" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+        <div class="cusrtomer-layout py-5">
+
+            <div class="container py-lg-4 py-md-3 pb-lg-0">
+                <div class="heading text-center mx-auto">
+                    <h1 class="sub-title text-center">@Model.Header</h1>
+                    <h3 class="hny-title mb-md-5 mb-4">@Model.Body</h3>
+                </div>
+                <div class="center" style=" display: flex;
+                justify-content: center;
+                    align-items: center;">
+                    <a href="javascript:history.back()" class="btn btn-info">BACK</a>
+                </div>
+                <!-- /grids -->
+
+            </div>
+            <!-- /grids -->
+        </div>
+        <!-- //grids -->
+    </section>
+
+    <!-- Template JavaScript -->
+    <script src="~/Traversal-Starter/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Traversal-Starter/assets/js/theme-change.js"></script>
+    <!--/slider-js-->
+    <script src="~/Traversal-Starter/assets/js/jquery.min.js"></script>
+    <script src="~/Traversal-Starter/assets/js/modernizr-2.6.2.min.js"></script>
+    <script src="~/Traversal-Starter/assets/js/jquery.zoomslider.min.js"></script>
+    <!--//slider-js-->
+    <script src="~/Traversal-Starter/assets/js/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+        $(document).ready(function () {
+            $("#owl-demo1").owlCarousel({
+                loop: true,
+                margin: 20,
+                nav: false,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false
+                    },
+                    736: {
+                        items: 1,
+                        nav: false
+                    },
+                    1000: {
+                        items: 1,
+                        nav: false,
+                        loop: true
+                    }
+                }
+            })
+        })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- stats number counter-->
+    <script src="~/Traversal-Starter/assets/js/jquery.waypoints.min.js"></script>
+    <script src="~/Traversal-Starter/assets/js/jquery.countup.js"></script>
+    <script>
+        $('.counter').countUp();
+    </script>
+    <!-- //stats number counter -->
+    <!--/MENU-JS-->
+    <script>
+        $(window).on("scroll", function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 80) {
+                $("#site-header").addClass("nav-fixed");
+            } else {
+                $("#site-header").removeClass("nav-fixed");
+            }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function () {
+            $("header").toggleClass("active");
+        });
+        $(document).on("ready", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+            $(window).on("resize", function () {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+            });
+        });
+    </script>
+    <!--//MENU-JS-->
+
+    <script src="~/Traversal-Starter/assets/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

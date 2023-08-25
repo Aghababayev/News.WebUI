@@ -1,9 +1,16 @@
+using FluentValidation.AspNetCore;
+using MediatR;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using News.WebUI.DataAccess.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +24,37 @@ namespace News.WebUI
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-        }
+            services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Startup>()); 
+            string connection = Configuration.GetConnectionString("Connnection");
+            services.AddDbContext<Context>(opt => opt.UseSqlServer(connection));
+            services.AddHttpContextAccessor();       
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+            });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+              .AddCookie(options =>
+              {
+                  options.LoginPath = "/Admin/Login/Index";
+                  options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                  options.SlidingExpiration = true;
+                  options.Cookie.HttpOnly = true;
+                  options.Cookie.IsEssential = true;
+              });
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                  .RequireAuthenticatedUser()
+                  .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            });
+        }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -41,20 +69,21 @@ namespace News.WebUI
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                       name: "areas",
+                     pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-           name: "areas",
-           pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}"
-         );
+
+
             });
         }
     }
