@@ -9,7 +9,7 @@ namespace News.WebUI.Validators.NewsValidator
         {
             RuleFor(x => x.Header)
                 .NotNull().WithMessage("Please insert header")
-                .MinimumLength(5).WithMessage("Minimum 5 characters")
+                    .MinimumLength(30).WithMessage("Minimum 40 characters")
                 .MaximumLength(100).WithMessage("Maximum 100 characters");
 
             RuleFor(x => x.Body)
