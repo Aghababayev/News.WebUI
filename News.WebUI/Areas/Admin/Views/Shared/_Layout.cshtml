@@ -36,17 +36,18 @@
                         </div>
                     </label>
                 </div>
-        <div style="position: absolute; top: 10px; right: 20px;">
-            <a class="btn-light"
-               style="display: inline-block; padding: 10px 20px; font-size: 16px; text-align: center; background-color: white; color: black; border: none; border-radius: 5px; transition: background-color 0.3s, color 0.3s;"
-               href="/Admin/Login/Logout"
-               onmouseover="this.style.color='red';"
-               onmouseout="this.style.color='black';">Logout</a>
+                <div style="position: absolute; top: 10px; right: 20px;">
+                    <a class="btn-light"
+                       style="display: inline-block; padding: 10px 20px; font-size: 16px; text-align: center; background-color: white; color: black; border: none; border-radius: 5px; transition: background-color 0.3s, color 0.3s;"
+                       href="/Admin/Login/Logout"
+                       onmouseover="this.style.color='red';"
+                       onmouseout="this.style.color='black';">Logout</a>
+                </div>
 
-            
-                </nav>
-            </div>
+
+            </nav>
         </div>
+       
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -57,13 +58,13 @@
                             <h5 style="color:#FF8000; text-align:center;">Welcome, @userRole </h5>
                             <a class="nav-link" href="/Admin/Dashboard/Index/">
                                 <div class="sb-nav-link-icon"></div>
-                              <h4 style="color:whitesmoke">DASHBOARD</h4>
+                                <h4 style="color:whitesmoke">DASHBOARD</h4>
                             </a>
                             @if (User.IsInRole("Admin"))
                             {
                                 <a class="nav-link" href="/Admin/Content/Index">
                                     <div class="sb-nav-link-icon"></div>
-                                    <h4 style ="color:whitesmoke">CONTENT</h4>
+                                    <h4 style="color:whitesmoke">CONTENT</h4>
                                 </a>
                             }
                         </div>
